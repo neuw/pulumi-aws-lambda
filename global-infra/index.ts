@@ -31,3 +31,6 @@ cert.domainValidationOptions.apply(opts => {
         records.push(record);
     }
 });
+
+export const defaultZoneId = zone.zoneId;
+export const defaultCertArn = cert.arn;

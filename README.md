@@ -9,3 +9,5 @@
 - `mkdir global-infra` && `cd global-infra` - create a folder dedicated to the global infra (like cert and route 53 DNS, public zone was manually created, it is referred)
 - `pulumi new aws-typescript` - init pulumi using aws-typescript template
 - the config for the cert domain(wildcard cert) and the hosted zone domain - are made part of the config
+
+:warning: For all the sub modules(infra, apis, etc) the AWS_PROFILE env variable was present, and only then the pulumi up command used to work - otherwise there will be a runtime error
