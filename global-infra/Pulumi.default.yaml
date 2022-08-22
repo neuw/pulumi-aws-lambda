@@ -1,0 +1,4 @@
+config:
+  aws:region: ap-south-1
+  global-infra:cert_domain_name: '*.app.neuw.io'
+  global-infra:base_domain_name: app.neuw.io

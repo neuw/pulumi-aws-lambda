@@ -1,0 +1,3 @@
+name: global-infra
+runtime: nodejs
+description: Global Common Infra
