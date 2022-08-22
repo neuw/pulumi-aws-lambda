@@ -1,0 +1,6 @@
+{
+    "name": "test-function",
+    "dependencies": {
+        "@faker-js/faker": "^7.4.0"
+    }
+}
