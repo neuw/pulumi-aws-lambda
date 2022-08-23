@@ -21,8 +21,9 @@ const api_zone = new aws.route53.Zone(api_base_domain_name, {
 
 // aws wildcard cert for apps
 const app_cert: aws.acm.Certificate = new aws.acm.Certificate(app_cert_domain_name, {
-    domainName: app_cert_domain_name,
+    domainName: app_base_domain_name,
     validationMethod: 'DNS',
+    subjectAlternativeNames: [app_cert_domain_name]
 }, {
     retainOnDelete: true
 });
@@ -47,8 +48,9 @@ app_cert.domainValidationOptions.apply(opts => {
 
 // aws wildcard cert for apis
 const api_cert: aws.acm.Certificate = new aws.acm.Certificate(api_cert_domain_name, {
-    domainName: api_cert_domain_name,
+    domainName: api_base_domain_name,
     validationMethod: 'DNS',
+    subjectAlternativeNames: [api_cert_domain_name]
 }, {
     retainOnDelete: true
 });
