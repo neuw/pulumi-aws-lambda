@@ -1,8 +1,12 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
+import {ConfigData} from "./interfaces";
 
-const stack = pulumi.getStack();
+const stack: string = pulumi.getStack();
+const pulumiConfig = new pulumi.Config();
+const configData = pulumiConfig.requireObject<ConfigData>("data");
+
+const infraRef = new pulumi.StackReference(`${configData.org}/infra/${configData.stack}`);
 
 const lambdaRole = new aws.iam.Role("Role-Lambda-Test-Apis", {
     assumeRolePolicy: {
@@ -56,21 +60,21 @@ const integration = new aws.apigatewayv2.Integration("Lambda-Integration-Test-Ap
 
 const route = new aws.apigatewayv2.Route("API-Route-Test-Apis", {
     apiId: apigw.id,
-    routeKey: "$default",
+    routeKey: "GET /apis/v1",
     target: pulumi.interpolate`integrations/${integration.id}`
 });
 
 const stage = new aws.apigatewayv2.Stage("API-Stage-Test-Apis", {
     apiId: apigw.id,
     name: stack,
-    routeSettings: [
-        {
-            routeKey: route.routeKey,
-            throttlingBurstLimit: 5000,
-            throttlingRateLimit: 10000,
-        },
-    ],
     autoDeploy: true,
 }, {dependsOn: [route]});
+
+new aws.apigatewayv2.ApiMapping("API-Mapping-Test-Apis", {
+    domainName: infraRef.getOutput("customApiDomainName"),
+    apiId: apigw.id,
+    stage: stage.id,
+    apiMappingKey: 'hello-world',
+})
 
 export const endpoint = pulumi.interpolate`${apigw.apiEndpoint}/${stage.name}`;

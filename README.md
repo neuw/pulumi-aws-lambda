@@ -16,7 +16,7 @@
 
 - similar to what we did for other projects `mkdir infra && cd infra` - init a project like showcased in the repository
 - purpose of it? infra for stage/ environment specific will be referred from here, in the respective end application/ API projects.
-- change the org's name to individual account name/ organization name
+- change the `org` name to individual account name/ organization name
 - infra relies on the global-infra for the certs and base domain for the api gateway's custom domain name
 
 

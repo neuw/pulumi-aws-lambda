@@ -1,2 +1,6 @@
 config:
   aws:region: ap-south-1
+  apis:data:
+    org: krnbr
+    custom_api_domain: true
+    stack: dev
