@@ -11,4 +11,9 @@
 - the config for the cert domain(wildcard cert) and the hosted zone domain - are made part of the config
 - in the Pulumi.default.yaml rename the example.com to your own domain
 
+- similar to what we did for other projects `mkdir infra && cd infra` - init a project like showcased in the repository
+- purpose of it? infra for stage/ environment specific will be referred from here, in the respective end application/ API projects.
+- change the org's name to individual account name/ organization name
+- infra relies on the global-infra for the certs and base domain for the api gateway's custom domain name
+
 :warning: For all the submodules(infra, apis, etc.) the AWS_PROFILE env variable was present, and only then the pulumi up command used to work - otherwise there will be a runtime error

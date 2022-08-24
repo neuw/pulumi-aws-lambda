@@ -1,0 +1,6 @@
+config:
+  aws:region: ap-south-1
+  infra:data:
+    org: krnbr
+    custom_api_domain: true
+    custom_api_sub_domain: dev

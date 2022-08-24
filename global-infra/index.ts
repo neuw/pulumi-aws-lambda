@@ -78,3 +78,5 @@ export const appCertArn = app_cert.arn;
 export const api_dns_nameservers = api_zone.nameServers; // helpful for configuring this to your domain provider - specially when it is non AWS.
 export const apiZoneId = api_zone.zoneId;
 export const apiCertArn = api_cert.arn;
+export const apiDomain = api_base_domain_name;
+export const appDomain = app_base_domain_name;
