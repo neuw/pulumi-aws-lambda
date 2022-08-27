@@ -13,8 +13,8 @@
     },
     "scripts": {
         "debug": "npm --version && node --version && tsc --version",
-        "build-local": "tsc ./app/*.ts",
-        "build-prod": "cd app && npm i --production && cd .. && tsc ./app/*.ts",
+        "build-local": "tsc ./hello-world/*.ts",
+        "build-prod": "cd ./hello-world && npm i --production && cd .. && tsc ./hello-world/*.ts",
         "stack-preview": "pulumi preview",
         "stack-up": "pulumi up",
         "stack-deploy": "pulumi up --skip-preview -y"

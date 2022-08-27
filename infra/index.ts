@@ -29,16 +29,6 @@ function GetValue<T>(output: Output<T>) {
     });
 }
 
-/*pulumi.log.info(JSON.stringify({
-    appZoneId: appZoneId,
-    appCertArn: appCertArn,
-    appDomain: appDomain,
-    apiZoneId: apiZoneId,
-    apiCertArn: apiCertArn,
-    apiDomain: apiDomain,
-    configData: configData
-}))*/
-
 // no custom domain for lower environments - may be the ones specific to the devs individually
 if (configData.custom_api_domain) {
 

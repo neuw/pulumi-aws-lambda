@@ -31,7 +31,7 @@ const lambdaRoleAttachment = new aws.iam.RolePolicyAttachment("Role-Attachment-T
 
 const lambda = new aws.lambda.Function("Lambda-Function", {
     code: new pulumi.asset.AssetArchive({
-        ".": new pulumi.asset.FileArchive("./app"),
+        ".": new pulumi.asset.FileArchive("./hello-world"),
     }),
     runtime: "nodejs16.x",
     role: lambdaRole.arn,
@@ -58,9 +58,11 @@ const integration = new aws.apigatewayv2.Integration("Lambda-Integration-Test-Ap
     passthroughBehavior: "WHEN_NO_MATCH"
 });
 
+pulumi.log.info("integration", integration)
+
 const route = new aws.apigatewayv2.Route("API-Route-Test-Apis", {
     apiId: apigw.id,
-    routeKey: "GET /apis/v1",
+    routeKey: "GET /apis/v1/hello-world",
     target: pulumi.interpolate`integrations/${integration.id}`
 });
 
@@ -74,7 +76,8 @@ new aws.apigatewayv2.ApiMapping("API-Mapping-Test-Apis", {
     domainName: infraRef.getOutput("customApiDomainName"),
     apiId: apigw.id,
     stage: stage.id,
-    apiMappingKey: 'hello-world',
 })
 
 export const endpoint = pulumi.interpolate`${apigw.apiEndpoint}/${stage.name}`;
+export const integrationReference = integration;
+export const routeReference = route;
